@@ -11,7 +11,7 @@ As I cannot find a visa library for Nim, I decided to do it by myself.
 
 ```nim
 let rm = newResourceManager()
-echo rm.list_resources() # print all the resource.
+echo rm.list_resources() # print all the resources.
 ```
 
 

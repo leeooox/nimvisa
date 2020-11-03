@@ -1,16 +1,27 @@
 import visa_wrapper,visa_exception
 import os,strutils
 
+## A Visa libarary for Nim
+## By leeooox at gmail dot com
+
 const
   READ_BUFFER_LEN = 1024
   INSTR_NAME_LEN  = 256
-  RSRC_TIMEOUT    = 2000
-  IO_TIMEOUT      = 2000
+  RSRC_TIMEOUT    = 5000
+  IO_TIMEOUT      = 5000
 
 type ResourceManager* = ref object of RootObj
   defaultRM:ViSession
 
 proc newResourceManager*(): ResourceManager =
+  ## ResourceManager construction, it will open an default ResourceManager
+  ## which could be used for list_resource or open a valid VISA resource address.
+  ## 
+  ## Example:
+  ## ```nim
+  ## let rm = newResourceManager()
+  ## echo rm.list_resources() # print all the resources.
+  ## ```
   result = ResourceManager()
   var defaultRM: ViSession
   checkStatus(viOpenDefaultRM(addr defaultRM))
@@ -32,11 +43,11 @@ proc newResource*(): Resource =
   result.timeout=   RSRC_TIMEOUT
   result.iotimeout= IO_TIMEOUT
 
-#### forward_declaration
+#----------------- Forward Declaration ---------------------------------#
 method set_visa_attribute(this:Resource,name:int,state:int): void {.base.}
 
 
-##################### ResourceManager Objects ###################################
+#--------------- ResourceManager Objects -------------------------------#
 method list_resources*(this: ResourceManager): seq[string] {.base.}=
   var 
     #defaultRM: ViSession
@@ -62,7 +73,7 @@ method list_resources*(this: ResourceManager): seq[string] {.base.}=
 method close*(this: ResourceManager): void {.base.}=
   checkStatus(this.defaultRM.viClose())
 
-###resource_name,access_mode 
+
 method open_resource*(this: ResourceManager,resource_name:string): Resource {.base.} =
   result = newResource()
   var status = this.defaultRM.viOpen(resource_name, VI_NULL, ViUInt32(result.timeout),
@@ -72,7 +83,7 @@ method open_resource*(this: ResourceManager,resource_name:string): Resource {.ba
 
 
 
-###### Resoure is the base class of GPIBInstrument
+#------------ Resoure Object -----------------#
 
 method write*(this:Resource, message:string, termination:string=""): void {.base.} =
   var retCount: ViUInt32
