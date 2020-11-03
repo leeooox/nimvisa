@@ -1,4 +1,4 @@
-import ../nimvisa
+import ../src/nimvisa
 
 let rm = newResourceManager()
 echo rm.list_resources() # print all the resource.

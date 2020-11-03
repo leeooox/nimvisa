@@ -1,4 +1,4 @@
-import ../nimvisa
+import ../src/nimvisa
 import os
 
 let rm = newResourceManager()
