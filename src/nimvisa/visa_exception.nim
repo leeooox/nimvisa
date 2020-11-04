@@ -248,7 +248,9 @@ proc checkStatus*(status:int32): void =
   of VI_ERROR_NPERMISSION:
     raise newException(ERROR_NPERMISSION,"Access to the resource or remote machine is denied. This is due to lack of sufficient privileges for the current user or machine")
   else:
-    raise newException(ERROR_UNKNOWN,"unknow error not defined in visa libaray")   
+    discard
+    #echo status
+    #raise newException(ERROR_UNKNOWN,"unknow error not defined in visa libaray")   
     
     
 
