@@ -7,6 +7,14 @@ As I cannot find a visa library for Nim, I decided to do it by myself.
 
 **nimvisa.nim** is high level based on visa_wrapper and inspired by [pyvisa](https://github.com/pyvisa/pyvisa). Only necessary procs(function) are implemented, and others to be done later when necessary.
 
+## Installation
+
+```shell
+nimble install nimvisa
+```
+
+
+
 ## Testing your installation
 
 ```nim
@@ -29,4 +37,4 @@ echo my_instrument.query(":APPL? CH1")
 rm.close()
 ```
 
-As limited bandwidth, I only implement it on windows10 64bit system.
+As limited bandwidth, I only implemented it on windows10 64-bit system.
