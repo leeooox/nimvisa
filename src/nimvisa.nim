@@ -1,4 +1,4 @@
-import visa_wrapper,visa_exception
+import nimvisa/[visa_wrapper,visa_exception]
 import os,strutils
 
 ## A Visa libarary for Nim

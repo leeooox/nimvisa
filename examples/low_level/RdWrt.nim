@@ -1,4 +1,4 @@
-import ../../visa_wrapper
+import ../../src/nimvisa/visa_wrapper
 
 import strFormat
 
